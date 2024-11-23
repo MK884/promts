@@ -1,6 +1,7 @@
 import React from "react";
 import "@/styles/globals.css";
 import { Metadata } from "next";
+import { Nav } from "@/components";
 
 export const metadata: Metadata = {
   title: "Promptia - AI Prompts",
@@ -13,7 +14,10 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         <div className="main">
           <div className="gradient" />
         </div>
-        <main className="app">{children}</main>
+        <main className="app">
+          <Nav />
+          {children}
+          </main>
       </body>
     </html>
   );
