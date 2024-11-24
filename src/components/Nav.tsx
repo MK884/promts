@@ -3,12 +3,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import {
+  signIn,
+  signOut,
+  useSession,
+  getProviders,
+  LiteralUnion,
+  ClientSafeProvider,
+} from "next-auth/react";
+import { BuiltInProviderType } from "next-auth/providers/index";
 
 function Nav() {
   const isUserLoggedIn = true;
-  const [provider, setProvider] = React.useState(null);
+  const [provider, setProvider] = React.useState<Record<
+    LiteralUnion<BuiltInProviderType, string>,
+    ClientSafeProvider
+  > | null>(null);
   const [toggleDropDown, setToggleDropDown] = React.useState<boolean>(false);
+  const { data: session } = useSession();
 
   React.useEffect(() => {
     const handleProvider = async () => {
@@ -35,14 +47,14 @@ function Nav() {
 
       {/* nav */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
             <button
               type="button"
-              onClick={() => signOut}
+              onClick={() => signOut()}
               className="outline_btn"
             >
               Sign Out
@@ -50,7 +62,7 @@ function Nav() {
 
             <Link href="/profile">
               <Image
-                src="./assets/images/logo.svg"
+                src={session?.user?.image || null}
                 width={37}
                 height={37}
                 alt="profile"
@@ -77,10 +89,10 @@ function Nav() {
 
       {/* mobile nav */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="./assets/images/logo.svg"
+              src={session?.user?.image || null}
               width={37}
               height={37}
               alt="profile"
