@@ -1,7 +1,7 @@
 import { Prompt } from "@/models";
 import { connectToDB } from "@/db";
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
   try {
     await connectToDB();
 
@@ -9,6 +9,7 @@ export const GET = async (request: Request) => {
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
+    console.log("Error in getAllPrompts ", error);
     return new Response("Failed to fetch all prompts", { status: 500 });
   }
 };

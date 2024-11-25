@@ -23,7 +23,6 @@ const PromptCard = ({
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-    console.log(post);
 
     if (post.creator._id === session?.user?._id) return router.push("/profile");
 
@@ -36,7 +35,6 @@ const PromptCard = ({
     setTimeout(() => setCopied(""), 3000);
   };
 
-  console.log(post);
 
   return (
     <div className="prompt_card">
@@ -46,7 +44,7 @@ const PromptCard = ({
           onClick={handleProfileClick}
         >
           <Image
-            // @ts-ignore
+            // @ts-expect-error
             src={post.creator?.image}
             alt="user_image"
             width={40}

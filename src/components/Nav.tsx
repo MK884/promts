@@ -1,20 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect } from "react";
+import { BuiltInProviderType } from "next-auth/providers/index";
 import {
+  ClientSafeProvider,
+  getProviders,
+  LiteralUnion,
   signIn,
   signOut,
   useSession,
-  getProviders,
-  LiteralUnion,
-  ClientSafeProvider,
 } from "next-auth/react";
-import { BuiltInProviderType } from "next-auth/providers/index";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 function Nav() {
-  const isUserLoggedIn = true;
   const [provider, setProvider] = React.useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
@@ -62,6 +61,7 @@ function Nav() {
 
             <Link href="/profile">
               <Image
+                // @ts-expect-error
                 src={session?.user?.image || null}
                 width={37}
                 height={37}
@@ -92,6 +92,7 @@ function Nav() {
         {session?.user ? (
           <div className="flex">
             <Image
+              // @ts-expect-error
               src={session?.user?.image || null}
               width={37}
               height={37}

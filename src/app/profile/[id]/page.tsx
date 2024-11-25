@@ -9,7 +9,7 @@ const UserProfile = ({ params }: { params: Promise<{ id: string }> }) => {
   const userName = searchParams.get("name");
 
   const [userPosts, setUserPosts] = useState<Array<IPromptObj>>([]);
-  const [id, setId] = useState<string>();
+  const [id, setId] = useState<string>('');
 
   useEffect(() => {
     const fetchPosts = async () => {

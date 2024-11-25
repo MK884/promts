@@ -1,5 +1,6 @@
 import { connectToDB } from "@/db";
 import { Prompt } from "@/models";
+import { NextRequest } from "next/server";
 
 export const GET = async (
   request: Request,
@@ -14,6 +15,7 @@ export const GET = async (
 
     return new Response(JSON.stringify(prompt), { status: 200 });
   } catch (error) {
+    console.log("Error in getPromptById ", error);
     return new Response("Internal Server Error", { status: 500 });
   }
 };
@@ -43,24 +45,32 @@ export const PATCH = async (
 
     return new Response("Successfully updated the Prompts", { status: 200 });
   } catch (error) {
+    console.log("Error in updatePromptById ", error);
     return new Response("Error Updating Prompt", { status: 500 });
   }
 };
 
 export const DELETE = async (
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  }
 ) => {
   try {
     await connectToDB();
 
-    const { id } = await params;
+    const param = await params;
+
+    const { id } = param;
 
     // Find the prompt by ID and remove it
     await Prompt.findByIdAndDelete(id);
 
     return new Response("Prompt deleted successfully", { status: 200 });
   } catch (error) {
+    console.log("Error in deletePromptById ", error);
     return new Response("Error deleting prompt", { status: 500 });
   }
 };
