@@ -61,6 +61,7 @@ function Nav() {
 
             <Link href="/profile">
               <Image
+                // @ts-expect-error: using null to avoid re-render if image is not here
                 src={session?.user?.image || null}
                 width={37}
                 height={37}
@@ -91,6 +92,7 @@ function Nav() {
         {session?.user ? (
           <div className="flex">
             <Image
+              // @ts-expect-error: using null to avoid re-render if image is not here
               src={session?.user?.image || null}
               width={37}
               height={37}

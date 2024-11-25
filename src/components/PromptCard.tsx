@@ -23,7 +23,6 @@ const PromptCard = ({
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-
     if (post.creator._id === session?.user?._id) return router.push("/profile");
 
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
@@ -35,7 +34,6 @@ const PromptCard = ({
     setTimeout(() => setCopied(""), 3000);
   };
 
-
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -44,6 +42,7 @@ const PromptCard = ({
           onClick={handleProfileClick}
         >
           <Image
+            // @ts-expect-error: using null to avoid re-render if image is not here
             src={post.creator?.image}
             alt="user_image"
             width={40}
