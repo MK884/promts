@@ -1,6 +1,5 @@
 import { connectToDB } from "@/db";
 import { Prompt } from "@/models";
-import { NextRequest } from "next/server";
 
 export const GET = async (
   request: Request,

@@ -44,7 +44,6 @@ const PromptCard = ({
           onClick={handleProfileClick}
         >
           <Image
-            // @ts-expect-error
             src={post.creator?.image}
             alt="user_image"
             width={40}
