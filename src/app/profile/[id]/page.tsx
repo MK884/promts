@@ -29,7 +29,7 @@ const UserProfile = ({ params }: { params: Promise<{ id: string }> }) => {
     };
 
     getId();
-  }, []);
+  });
 
   return (
     <Profile

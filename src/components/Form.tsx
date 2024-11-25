@@ -12,7 +12,7 @@ const Form = ({
   post: IPost;
   setPost: React.Dispatch<IPost>;
   submitting?: boolean;
-  handleSubmit: (e:React.FormEvent) => void;
+  handleSubmit: (e:React.FormEvent<HTMLFormElement>) => void;
 }) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
